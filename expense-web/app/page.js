@@ -13,6 +13,7 @@ export default function Home() {
     <main>
 
       <div>
+        
         {
             articles.map(article => (
               <div className="bg-blue-500" key={article.id}>
