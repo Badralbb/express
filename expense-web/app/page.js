@@ -8,7 +8,7 @@ export default function Home() {
     fetch("http://localhost:4000/articles").then(res => res.json()).then(data => {
       setArticles(data)
     })
-  })
+  },[])
   return (
     <main>
 
