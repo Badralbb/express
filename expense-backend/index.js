@@ -10,6 +10,12 @@ app.get('/articles', (req, res) => {
 app.get('/articles/:id', (req, res) => {
   res.send("Hello world")
 })
+app.get("/:id",(req,res)=>{
+  res.send("dynamic router")
+})
+app.use((req,res)=>{
+  res.send("hello world 404")
+})
 
 
 app.listen(port, () => {
