@@ -7,10 +7,14 @@ app.get('/articles', (req, res) => {
   res.json([{ title: "Hello world1", id: 1 }, { title: "Hello world2", id: 2 }, { title: "Hello world3", id: 3 }])
 })
 app.get('/articles/:id', (req, res) => {
-  res.send("Hello world")
+  res.json("Hello world")
 })
 app.get("/:id", (req, res) => {
   res.send("dynamic router")
+})
+app.get("/" ,(req,res)=>{
+  res.send(`<div>"Hellow it's index file color blue"</div>
+   <div>"Hellow it's index file color blue"</div>`)
 })
 app.use((req, res) => {
   res.send("hello world 404")
