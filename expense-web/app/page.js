@@ -34,9 +34,6 @@ export default function Home() {
           {
             categories.map((category, index) => (
               <div id={index} key={category.name} className="flex gap-6">
-
-
-
                 <div>
                   {
                     category.name
