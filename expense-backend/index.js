@@ -10,11 +10,8 @@ app.get('/articles', (req, res) => {
 
 const content = fs.readFileSync("content.json", "utf-8")
 
-console.log(content)
 
-console.log({content})
 
-console.log(JSON.parse(content))
 
 const categories = JSON.parse(content)
 
