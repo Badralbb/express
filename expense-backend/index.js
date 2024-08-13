@@ -21,6 +21,7 @@ app.get("/categories/list", (req, res) => {
 app.get("/categories/create", (req, res) => {
 
   const name = req.query.name
+  
   categories.push({ name: name })
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
