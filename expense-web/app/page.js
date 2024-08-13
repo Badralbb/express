@@ -11,34 +11,35 @@ export default function Home() {
     setCategories(data)
   }
 
-useEffect(() => {
-  loadList()
-}, [])
-const createNewCategory = async () => {
-  const name = prompt("name...")
-  const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
-  const data = await response.json()
-  loadList()
+  useEffect(() => {
+    loadList()
+  }, [])
+  const createNewCategory = async () => {
+    const name = prompt("name...")
+    const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
+    const data = await response.json()
+    loadList()
 
-}
-return (
-  <main>
+  }
+  return (
+    <main>
 
-    <div>
+      <div>
 
-      <button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</button>
-      {
-        categories.map(category => (
-          <div className="bg-blue-500" key={category.name}>
-            {
-              category.name
-            }
+        <button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</button>
+        {
+          categories.map(category => (
+            <div className="bg-blue-500" key={category.name}>
+              {
+                category.name
+              }
+              <button className="bg-red-400">edit</button>
+              <button className="bg-red-400">delete</button>
+            </div>
+          ))
+        }
+      </div>
 
-          </div>
-        ))
-      }
-    </div>
-
-  </main>
-);
+    </main>
+  );
 }
