@@ -26,6 +26,7 @@ app.get("/categories/create", (req, res) => {
   categories.push({ name: name })
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
+  
   res.json(["Success"])
 })
 app.listen(port, () => {
