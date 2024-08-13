@@ -21,23 +21,38 @@ export default function Home() {
     loadList()
 
   }
+  function dlt(){
+    
+  }
+  function edit(){
+    
+  }
   return (
     <main>
 
       <div>
 
         <button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</button>
-        {
-          categories.map(category => (
-            <div className="bg-blue-500" key={category.name}>
-              {
-                category.name
-              }
-              <button className="bg-red-400">edit</button>
-              <button className="bg-red-400">delete</button>
-            </div>
-          ))
-        }
+        <div className="flex flex-col gap-5">
+
+          {
+            categories.map(category => (
+              <div className="flex gap-6">
+
+
+
+                <div>
+                  {
+                      category.name
+                  }
+                </div>
+                <button className="bg-red-400" onClick={edit}>edit</button>
+                <button className="bg-red-400" onClick={dlt}>delete</button>
+
+              </div>
+            ))
+          }
+        </div>
       </div>
 
     </main>
