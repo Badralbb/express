@@ -1,23 +1,26 @@
 const express = require('express')
 const app = express()
 const port = process.env.port || 4000
+const fs = require("fs")
 const cors = require("cors")
 app.use(cors())
 app.get('/articles', (req, res) => {
   res.json([{ title: "Hello world1", id: 1 }, { title: "Hello world2", id: 2 }, { title: "Hello world3", id: 3 }])
 })
-app.get('/articles/:id', (req, res) => {
-  res.json("Hello world")
+
+const categories = [
+  {name: "shopping"}
+
+]
+
+app.get("/categories/list",(req,res)=>{
+  res.json(categories)
 })
-app.get("/:id", (req, res) => {
-  res.send("dynamic router")
-})
-app.get("/" ,(req,res)=>{
-  res.send(`<div>"Hellow it's index file color blue"</div>
-   <div>"Hellow it's index file color blue"</div>`)
-})
-app.use((req, res) => {
-  res.send("hello world 404")
+
+app.get("/categories/create",(req,res)=>{
+  const name = req.query.name
+ categories.push({name: name})
+ res.json(["Success"])
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
