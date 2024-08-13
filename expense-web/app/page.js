@@ -19,9 +19,13 @@ export default function Home() {
     const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
     const data = await response.json()
     loadList()
-
   }
-
+  function dlt(index){
+    if(confirm("Are you sure")){
+      categories.splice(index,1)
+      loadList()
+    }
+  }
 
   return (
     <main>
@@ -40,7 +44,7 @@ export default function Home() {
                   }
                 </div>
                 <button className="bg-red-400">edit</button>
-                <button className="bg-red-400">delete</button>
+                <button className="bg-red-400" onClick={dlt(index)}>delete</button>
 
               </div>
             ))
