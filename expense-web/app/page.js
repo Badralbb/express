@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [categories, setCategories] = useState([])
 
-  function loadList(){
+  function loadList() {
     fetch("http://localhost:4000/categories/list").then(res => res.json()).then(data => {
       setCategories(data)
     })
@@ -13,10 +13,14 @@ export default function Home() {
   useEffect(() => {
     loadList()
   }, [])
-  function createNewCategory(){
+  function createNewCategory() {
     const name = prompt("name...")
-    fetch(`http://localhost:4000/categories/create?name=${name}`)
-    loadList()
+    fetch(`http://localhost:4000/categories/create?name=${name}`).then(res => {
+      res.json()
+    }).then(() => {
+
+      loadList()
+    })
   }
   return (
     <main>
