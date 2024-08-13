@@ -12,6 +12,10 @@ const content = fs.readFileSync("content.json", "utf-8")
 
 console.log(content)
 
+console.log({content})
+
+console.log(JSON.parse(content))
+
 const categories = JSON.parse(content)
 
 app.get("/categories/list", (req, res) => {
@@ -20,7 +24,7 @@ app.get("/categories/list", (req, res) => {
 
 app.get("/categories/create", (req, res) => {
 
-  const name = req.query.name
+  const {name} = req.query
 
   categories.push({ name: name })
 
