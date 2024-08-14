@@ -13,7 +13,7 @@ const content = fs.readFileSync("content.json", "utf-8")
 
 
 
-const categories = JSON.parse(content)
+let categories = JSON.parse(content)
 
 app.get("/categories/list", (req, res) => {
   res.json(categories)
@@ -21,12 +21,33 @@ app.get("/categories/list", (req, res) => {
 
 app.get("/categories/create", (req, res) => {
 
-  const {name} = req.query
-
-  categories.push({ name: name })
+  const { name } = req.query
+  if(name != "") {
+    categories.push({ name: name })
+  }
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
-  
+
+  res.json(["Success"])
+})
+app.get("/categories/delete", (req, res) => {
+  const { dlt } = req.query
+
+  categories.splice(dlt, 1)
+  fs.writeFileSync("content.json", JSON.stringify(categories))
+  res.json(["Success"])
+
+})
+app.get("/categories/create/edit", (req, res) => {
+
+  const { edit } = req.query
+  const {index} = req.query
+  if(edit != "") {
+   categories[index].name = edit
+  }
+
+  fs.writeFileSync("content.json", JSON.stringify(categories))
+
   res.json(["Success"])
 })
 app.listen(port, () => {

@@ -16,13 +16,26 @@ export default function Home() {
   }, [])
   const createNewCategory = async () => {
     const name = prompt("name...")
-    const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
-    const data = await response.json()
-    loadList()
+
+    if (name) {
+      const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
+      const data = await response.json()
+      loadList()
+    }
   }
-  function dlt(index){
-    if(confirm("Are you sure")){
-      categories.splice(index,1)
+  const edit = async (oldName,index) =>{
+    const newName = prompt("Please enter the new name",oldName)
+    if(newName){
+      const response = await fetch(`http://localhost:4000/categories/create/edit?edit=${newName}&index=${index}`)
+      const data = await response.json()
+      loadList()
+    }
+  }
+  async function dlt(index) {
+
+    if (confirm("Are you sure")) {
+      const response = await fetch(`http://localhost:4000/categories/delete?dlt=${index}`)
+      const data = await response.json()
       loadList()
     }
   }
@@ -43,8 +56,8 @@ export default function Home() {
                     category.name
                   }
                 </div>
-                <button className="bg-red-400">edit</button>
-                <button className="bg-red-400" onClick={dlt(index)}>delete</button>
+                <button className="bg-red-400" onClick={() => edit(category.name,index)}>edit</button>
+                <button className="bg-red-400" onClick={() => dlt(index)}>delete</button>
 
               </div>
             ))
