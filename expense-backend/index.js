@@ -32,9 +32,11 @@ app.get("/categories/create", (req, res) => {
 })
 app.get("/categories/delete", (req, res) => {
   const { dlt } = req.query
-
+  
   categories.splice(dlt, 1)
+
   fs.writeFileSync("content.json", JSON.stringify(categories))
+
   res.json(["Success"])
 
 })
