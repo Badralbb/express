@@ -35,8 +35,8 @@ app.post("/categories/create", (req, res) => {
 
   res.json(["Success"])
 })
-app.get("/categories/delete", (req, res) => {
-  const { Id } = req.query
+app.delete("/categories/delete", (req, res) => {
+  const { Id } = req.body
   
   categories = categories.filter((cat)=>cat.id != Id)
 

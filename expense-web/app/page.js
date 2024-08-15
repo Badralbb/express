@@ -46,7 +46,13 @@ export default function Home() {
   
     if (confirm("Are you sure")) {
       console.log(categories[index].id)
-      const response = await fetch(`http://localhost:4000/categories/delete?Id=${categories[index].id}`)
+      const response = await fetch(`http://localhost:4000/categories/delete`,{
+        method:"DELETE",
+        body: JSON.stringify({id: categories[index].id}),
+        headers:{
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
       const data = await response.json()
       loadList()
     }
