@@ -1,6 +1,7 @@
 "use client"
 
 
+import { Component } from "@/components/ui/DemoChart";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -65,7 +66,8 @@ export default function Home() {
           }
         </div>
       </div>
-
+      
+            <Component/>
 
     </main>
   );
