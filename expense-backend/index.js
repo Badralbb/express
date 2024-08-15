@@ -36,7 +36,7 @@ app.post("/categories/create", (req, res) => {
   res.json(["Success"])
 })
 app.delete("/categories/delete", (req, res) => {
-  const { id } = req.body
+  const id  = req.body.id
 
   categories = categories.filter((cat)=>cat.id != id)
 

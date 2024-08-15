@@ -51,7 +51,7 @@ export default function Home() {
   async function dlt(index) {
   
     if (confirm("Are you sure")) {
-      console.log(categories[index].id)
+   
       const response = await fetch(`http://localhost:4000/categories/delete`,{
         method:"DELETE",
         body: JSON.stringify({id: categories[index].id}),
@@ -80,7 +80,7 @@ export default function Home() {
                     category.name
                   }
                 </div>
-                <button className="bg-red-400" onClick={() => edit(category.name,index)}>edit</button>
+                <button className="bg-red-400" onClick={()=>edit(category.name,index)}>edit</button>
                 <button className="bg-red-400" onClick={()=>dlt(index)}>delete</button>
 
               </div>
