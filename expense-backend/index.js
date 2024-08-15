@@ -36,21 +36,21 @@ app.post("/categories/create", (req, res) => {
   res.json(["Success"])
 })
 app.delete("/categories/delete", (req, res) => {
-  const { Id } = req.body
-  
-  categories = categories.filter((cat)=>cat.id != Id)
+  const { id } = req.body
+
+  categories = categories.filter((cat)=>cat.id != id)
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
 
   res.json(["Success"])
 
 })
-app.get("/categories/create/edit", (req, res) => {
+app.put("/categories/create/put", (req, res) => {
 
-  const {id, updatedName} = req.query
-  
+  const {id, updatedName} = req.body
+  console.log(id,updatedName)
   const index = categories.findIndex(cat => cat.id == id)
-  console.log(index)
+ 
 
   if(updatedName != "") {
    categories[index].name = updatedName

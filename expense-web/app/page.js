@@ -37,7 +37,13 @@ export default function Home() {
   const edit = async (oldName,index) =>{
     const newName = prompt("Please enter the new name",oldName)
     if(newName){
-      const response = await fetch(`http://localhost:4000/categories/create/edit?updatedName=${newName}&id=${categories[index].id}`)
+      const response = await fetch(`http://localhost:4000/categories/create/put`,{
+        method:"PUT",
+        body:JSON.stringify({id:categories[index].id,updatedName:newName}),
+        headers:{
+          "Content-type": "application/json; charset=UTF-8"
+        },
+      })
       const data = await response.json()
       loadList()
     }
