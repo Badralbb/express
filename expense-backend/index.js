@@ -4,6 +4,7 @@ const port = process.env.port || 4000
 const fs = require("fs")
 const cors = require("cors")
 app.use(cors())
+app.use(express.json())
 app.get('/articles', (req, res) => {
   res.json([{ title: "Hello world1", id: 1 }, { title: "Hello world2", id: 2 }, { title: "Hello world3", id: 3 }])
 })
@@ -19,11 +20,15 @@ app.get("/categories/list", (req, res) => {
   res.json(categories)
 })
 
-app.get("/categories/create", (req, res) => {
+app.post("/categories/create", (req, res) => {
 
-  const { name } = req.query
+  const { name } = req.body
+
   if(name != "") {
-    categories.push({ name: name })
+    categories.push({ name: name,
+      id:new Date().toISOString()
+
+    })
   }
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
@@ -31,9 +36,9 @@ app.get("/categories/create", (req, res) => {
   res.json(["Success"])
 })
 app.get("/categories/delete", (req, res) => {
-  const { dlt } = req.query
+  const { Id } = req.query
   
-  categories.splice(dlt, 1)
+  categories = categories.filter((cat)=>cat.id != Id)
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
 
@@ -42,10 +47,13 @@ app.get("/categories/delete", (req, res) => {
 })
 app.get("/categories/create/edit", (req, res) => {
 
-  const { edit } = req.query
-  const {index} = req.query
-  if(edit != "") {
-   categories[index].name = edit
+  const {id, updatedName} = req.query
+  
+  const index = categories.findIndex(cat => cat.id == id)
+  console.log(index)
+
+  if(updatedName != "") {
+   categories[index].name = updatedName
   }
 
   fs.writeFileSync("content.json", JSON.stringify(categories))

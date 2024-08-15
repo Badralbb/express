@@ -20,7 +20,15 @@ export default function Home() {
     const name = prompt("name...")
 
     if (name) {
-      const response = await fetch(`http://localhost:4000/categories/create?name=${name}`)
+      const response = await fetch(`http://localhost:4000/categories/create`,{
+
+        method:"POST",
+        body: JSON.stringify({name:name}),
+        headers:{
+          "Content-type": "application/json; charset=UTF-8"
+        },
+      }
+      )
       const data = await response.json()
       loadList()
     }
@@ -28,15 +36,16 @@ export default function Home() {
   const edit = async (oldName,index) =>{
     const newName = prompt("Please enter the new name",oldName)
     if(newName){
-      const response = await fetch(`http://localhost:4000/categories/create/edit?edit=${newName}&index=${index}`)
+      const response = await fetch(`http://localhost:4000/categories/create/edit?updatedName=${newName}&id=${categories[index].id}`)
       const data = await response.json()
       loadList()
     }
   }
   async function dlt(index) {
-
+  
     if (confirm("Are you sure")) {
-      const response = await fetch(`http://localhost:4000/categories/delete?dlt=${index}`)
+      console.log(categories[index].id)
+      const response = await fetch(`http://localhost:4000/categories/delete?Id=${categories[index].id}`)
       const data = await response.json()
       loadList()
     }
@@ -52,14 +61,14 @@ export default function Home() {
 
           {
             categories.map((category, index) => (
-              <div id={index} key={category.name} className="flex gap-6">
+              <div key={category.name} className="flex gap-6">
                 <div>
                   {
                     category.name
                   }
                 </div>
                 <button className="bg-red-400" onClick={() => edit(category.name,index)}>edit</button>
-                <button className="bg-red-400" onClick={() => dlt(index)}>delete</button>
+                <button className="bg-red-400" onClick={()=>dlt(index)}>delete</button>
 
               </div>
             ))
