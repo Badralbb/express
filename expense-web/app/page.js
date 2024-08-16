@@ -35,14 +35,14 @@ export default function Home() {
       loadList()
     }
   }
-/**
- * promise1.th 1
- * promise2    3
- * code        5
- * code        8
- * code
- *
- */
+  /**
+   * promise1.th 1
+   * promise2    3
+   * code        5
+   * code        8
+   * code
+   *
+   */
 
 
   const edit = async (oldName, id) => {
@@ -51,7 +51,7 @@ export default function Home() {
 
 
 
-    await fetch(`http://localhost:4000/categories/${id}`, {
+      await fetch(`http://localhost:4000/categories/${id}`, {
         method: "PUT",
         body: JSON.stringify({ id: id, updatedName: newName }),
         headers: {
@@ -66,21 +66,21 @@ export default function Home() {
   }
   async function dlt(id) {
     console.log(id)
-    if (confirm("Are you sure")) {
 
-      const response = await fetch(`http://localhost:4000/categories/${id}`, {
 
-        method: "DELETE",
+    const response = await fetch(`http://localhost:4000/categories/${id}`, {
 
-        body: JSON.stringify({ id: id }),
+      method: "DELETE",
 
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-      const data = await response.json()
-      loadList()
-    }
+      body: JSON.stringify({ id: id }),
+
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    const data = await response.json()
+    loadList()
+
   }
 
   return (
