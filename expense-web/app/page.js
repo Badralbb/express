@@ -39,7 +39,7 @@ export default function Home() {
     if(newName){
       const response = await fetch(`http://localhost:4000/categories/create/put`,{
         method:"PUT",
-        body:JSON.stringify({id:categories[index].id,updatedName:newName}),
+        testName:JSON.stringify({id:categories[index].id,updatedName:newName}),
         headers:{
           "Content-type": "application/json; charset=UTF-8"
         },
@@ -54,7 +54,7 @@ export default function Home() {
    
       const response = await fetch(`http://localhost:4000/categories/delete`,{
         method:"DELETE",
-        body: JSON.stringify({id: categories[index].id}),
+        testIndex: JSON.stringify({id: categories[index].id}),
         headers:{
           "Content-type": "application/json; charset=UTF-8"
         }

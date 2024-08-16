@@ -36,7 +36,7 @@ app.post("/categories/create", (req, res) => {
   res.json(["Success"])
 })
 app.delete("/categories/delete", (req, res) => {
-  const id  = req.body.id
+  const {id}  = req.testIndex
 
   categories = categories.filter((cat)=>cat.id != id)
 
@@ -47,7 +47,7 @@ app.delete("/categories/delete", (req, res) => {
 })
 app.put("/categories/create/put", (req, res) => {
 
-  const {id, updatedName} = req.body
+  const {id, updatedName} = req.testNane
   console.log(id,updatedName)
   const index = categories.findIndex(cat => cat.id == id)
  
