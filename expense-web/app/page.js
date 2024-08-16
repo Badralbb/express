@@ -20,12 +20,13 @@ export default function Home() {
     const name = prompt("name...")
 
     if (name) {
-      const response = await fetch(`http://localhost:4000/categories/create`,{
+      const response = await fetch(`http://localhost:4000/categories/create`, {
 
-        method:"POST",
-        body: JSON.stringify({name:name,
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
         }),
-        headers:{
+        headers: {
           "Content-type": "application/json; charset=UTF-8"
         },
       }
@@ -34,13 +35,13 @@ export default function Home() {
       loadList()
     }
   }
-  const edit = async (oldName,index) =>{
-    const newName = prompt("Please enter the new name",oldName)
-    if(newName){
-      const response = await fetch(`http://localhost:4000/categories/create/put`,{
-        method:"PUT",
-        body:JSON.stringify({id:categories[index].id,updatedName:newName}),
-        headers:{
+  const edit = async (oldName, index) => {
+    const newName = prompt("Please enter the new name", oldName)
+    if (newName) {
+      const response = await fetch(`http://localhost:4000/categories/create/put`, {
+        method: "PUT",
+        body: JSON.stringify({ id: categories[index].id, updatedName: newName }),
+        headers: {
           "Content-type": "application/json; charset=UTF-8"
         },
       })
@@ -49,13 +50,16 @@ export default function Home() {
     }
   }
   async function dlt(index) {
-  
+
     if (confirm("Are you sure")) {
-   
-      const response = await fetch(`http://localhost:4000/categories/delete`,{
-        method:"DELETE",
-        body: JSON.stringify({id: categories[index].id}),
-        headers:{
+
+      const response = await fetch(`http://localhost:4000/categories/delete`, {
+
+        method: "DELETE",
+
+        body: JSON.stringify({ id: categories[index].id }),
+
+        headers: {
           "Content-type": "application/json; charset=UTF-8"
         }
       })
@@ -70,26 +74,29 @@ export default function Home() {
       <div>
 
         <button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</button>
+
         <div className="flex flex-col gap-5">
 
           {
             categories.map((category, index) => (
+
               <div key={category.name} className="flex gap-6">
+                
                 <div>
                   {
                     category.name
                   }
                 </div>
-                <button className="bg-red-400" onClick={()=>edit(category.name,index)}>edit</button>
-                <button className="bg-red-400" onClick={()=>dlt(index)}>delete</button>
+                <button className="bg-red-400" onClick={() => edit(category.name, index)}>edit</button>
+                <button className="bg-red-400" onClick={() => dlt(index)}>delete</button>
 
               </div>
             ))
           }
         </div>
       </div>
-      
-            <Component/>
+
+      <Component />
 
     </main>
   );
