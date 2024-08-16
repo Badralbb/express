@@ -8,7 +8,7 @@ export default function Home() {
   const [categories, setCategories] = useState([])
 
   const loadList = async () => {
-    const response = await fetch("http://localhost:4000/categories/list")
+    const response = await fetch("http://localhost:4000/categories")
     const data = await response.json();
     setCategories(data)
   }
@@ -20,7 +20,7 @@ export default function Home() {
     const name = prompt("name...")
 
     if (name) {
-      const response = await fetch(`http://localhost:4000/categories/create`, {
+      const response = await fetch(`http://localhost:4000/categories`, {
 
         method: "POST",
         body: JSON.stringify({
@@ -45,15 +45,15 @@ export default function Home() {
  */
 
 
-  const edit = async (oldName, index) => {
+  const edit = async (oldName, id) => {
     const newName = prompt("Please enter the new name", oldName)
     if (newName) {
 
 
 
-    await fetch(`http://localhost:4000/categories/create/put`, {
+    await fetch(`http://localhost:4000/categories/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ id: categories[index].id, updatedName: newName }),
+        body: JSON.stringify({ id: id, updatedName: newName }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         },
@@ -65,10 +65,10 @@ export default function Home() {
     }
   }
   async function dlt(id) {
-
+    console.log(id)
     if (confirm("Are you sure")) {
 
-      const response = await fetch(`http://localhost:4000/categories/delete`, {
+      const response = await fetch(`http://localhost:4000/categories/${id}`, {
 
         method: "DELETE",
 
@@ -103,7 +103,7 @@ export default function Home() {
                   }
                 </div>
 
-                <button className="bg-red-400" onClick={() => edit(category.name, index)}>edit</button>
+                <button className="bg-red-400" onClick={() => edit(category.name, category.id)}>edit</button>
 
                 <button className="bg-red-400" onClick={() => dlt(category.id)}>delete</button>
 

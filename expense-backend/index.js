@@ -13,11 +13,16 @@ const content = fs.readFileSync("content.json", "utf-8")
 
 let categories = JSON.parse(content)
 
-app.get("/categories/list", (req, res) => {
+app.get("/categories", (req, res) => {
   res.json(categories)
 })
+app.get("/categories/:id",(req,res) =>{
+  const {id} = req.params
+  const category = categories.find(cat => cat.id === id)
+  res.json(category)
+})
 
-app.post("/categories/create", (req, res) => {
+app.post("/categories", (req, res) => {
 
   const { name } = req.body
 
@@ -32,8 +37,8 @@ app.post("/categories/create", (req, res) => {
 
   res.json(["Success"])
 })
-app.delete("/categories/delete", (req, res) => {
-  const {id}  = req.body
+app.delete("/categories/:id", (req, res) => {
+  const {id}  = req.params
 
   categories = categories.filter((cat)=>cat.id != id)
 
@@ -42,10 +47,10 @@ app.delete("/categories/delete", (req, res) => {
   res.json(["Success"])
 
 })
-app.put("/categories/create/put", (req, res) => {
+app.put("/categories/:id", (req, res) => {
+  const {id} = req.params
+  const {updatedName} = req.body
 
-  const {id, updatedName} = req.body
-  console.log(id,updatedName)
   const index = categories.findIndex(cat => cat.id == id)
  
 
