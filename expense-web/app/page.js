@@ -49,7 +49,7 @@ export default function Home() {
       loadList()
     }
   }
-  async function dlt(index) {
+  async function dlt(id) {
 
     if (confirm("Are you sure")) {
 
@@ -57,7 +57,7 @@ export default function Home() {
 
         method: "DELETE",
 
-        body: JSON.stringify({ id: categories[index].id }),
+        body: JSON.stringify({ id: id }),
 
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -90,7 +90,7 @@ export default function Home() {
 
                 <button className="bg-red-400" onClick={() => edit(category.name, index)}>edit</button>
 
-                <button className="bg-red-400" onClick={() => dlt(index)}>delete</button>
+                <button className="bg-red-400" onClick={() => dlt(category.id)}>delete</button>
 
               </div>
             ))
