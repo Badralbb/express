@@ -81,13 +81,15 @@ export default function Home() {
             categories.map((category, index) => (
 
               <div key={category.name} className="flex gap-6">
-                
+
                 <div>
                   {
                     category.name
                   }
                 </div>
+
                 <button className="bg-red-400" onClick={() => edit(category.name, index)}>edit</button>
+
                 <button className="bg-red-400" onClick={() => dlt(index)}>delete</button>
 
               </div>
