@@ -18,11 +18,16 @@ const getCategory = ({id})=>{
 }
 
 const deleteCategory = ({id}) =>{
- 
   categories = categories.filter((cat) => cat.id != id)
+  fs.writeFileSync("content.json", JSON.stringify(categories))
+}
+
+const updateCategories = ({id,updatedName}) =>{
+  const index = categories.findIndex(cat => cat.id == id)
+
+  categories[index].name = updatedName
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
-
 }
 
 const createNewCategory = async ({name}) =>{
@@ -59,7 +64,7 @@ app.delete("/categories/:id", (req, res) => {
     return
   }
   deleteCategory({id})
-  res.sendStatus(204)
+  res.sendStatus(205)
 
 })
 app.put("/categories/:id", (req, res) => {
@@ -69,13 +74,9 @@ app.put("/categories/:id", (req, res) => {
     res.status(400).json({message: "Name field is required"})
     return
   }
-  const index = categories.findIndex(cat => cat.id == id)
+  updateCategories({id,updatedName})
 
-  categories[index].name = updatedName
-
-  fs.writeFileSync("content.json", JSON.stringify(categories))
-
-  res.json(["Success"])
+  res.sendStatus(205)
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
