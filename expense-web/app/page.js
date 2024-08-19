@@ -65,8 +65,6 @@ export default function Home() {
     }
   }
   async function dlt(id) {
-    console.log(id)
-
 
     const response = await fetch(`http://localhost:4000/categories/${id}`, {
 
@@ -79,9 +77,10 @@ export default function Home() {
       }
     })
     const data = await response.json()
-    loadList()
-
+   loadList()
   }
+
+  
 
   return (
     <main>
@@ -113,7 +112,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Component />
+  
 
     </main>
   );
