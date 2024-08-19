@@ -65,20 +65,21 @@ export default function Home() {
     }
   }
   async function dlt(id) {
+    if (confirm("Are you sure")) {
+      await fetch(`http://localhost:4000/categories/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify({ id: id }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
 
-    await fetch(`http://localhost:4000/categories/${id}`, {
-      method: "DELETE",
-      body: JSON.stringify({ id: id }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
 
-
-    loadList()
+      loadList()
+    }
   }
 
-  
+
 
   return (
     <main>
@@ -110,7 +111,7 @@ export default function Home() {
         </div>
       </div>
 
-  
+
 
     </main>
   );
