@@ -55,7 +55,6 @@ app.put("/categories/:id", (req, res) => {
 
   categories[index].name = updatedName
 
-
   fs.writeFileSync("content.json", JSON.stringify(categories))
 
   res.json(["Success"])

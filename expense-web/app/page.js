@@ -66,18 +66,16 @@ export default function Home() {
   }
   async function dlt(id) {
 
-    const response = await fetch(`http://localhost:4000/categories/${id}`, {
-
+    await fetch(`http://localhost:4000/categories/${id}`, {
       method: "DELETE",
-
       body: JSON.stringify({ id: id }),
-
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
-    const data = await response.json()
-   loadList()
+
+
+    loadList()
   }
 
   
@@ -92,9 +90,9 @@ export default function Home() {
         <div className="flex flex-col gap-5">
 
           {
-            categories.map((category, index) => (
+            categories.map((category) => (
 
-              <div key={category.name} className="flex gap-6">
+              <div key={category.id} className="flex gap-6">
 
                 <div>
                   {
