@@ -11,9 +11,20 @@ app.get('/articles', (req, res) => {
   res.json([{ title: "Hello world1", id: 1 }, { title: "Hello world2", id: 2 }, { title: "Hello world3", id: 3 }])
 })
 
-const readCategories = ()=>{
+
+const getCategory = ({id})=>{
+  const category = categories.find(cat => cat.id === id)
+  return category
+}
+
+const deleteCategory = ({id}) =>{
+ 
+  categories = categories.filter((cat) => cat.id != id)
+
+  fs.writeFileSync("content.json", JSON.stringify(categories))
 
 }
+
 const createNewCategory = async ({name}) =>{
   const id = uuidv4()
  
@@ -30,7 +41,7 @@ app.get("/categories", (req, res) => {
 })
 app.get("/categories/:id", (req, res) => {
   const { id } = req.params
-  const category = categories.find(cat => cat.id === id)
+  const category = getCategory({id})
   res.json(category)
 })
 
@@ -47,11 +58,7 @@ app.delete("/categories/:id", (req, res) => {
     res.sendStatus(404)
     return
   }
-
-  categories = categories.filter((cat) => cat.id != id)
-
-  fs.writeFileSync("content.json", JSON.stringify(categories))
-
+  deleteCategory({id})
   res.sendStatus(204)
 
 })
