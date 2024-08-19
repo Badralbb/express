@@ -47,7 +47,7 @@ app.get("/categories", (req, res) => {
 app.get("/categories/:id", (req, res) => {
   const { id } = req.params
   const category = getCategory({id})
-  res.json(category)
+  res.sendStatus(200)
 })
 
 app.post("/categories", async (req, res) => {
