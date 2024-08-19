@@ -47,22 +47,22 @@ export default function Home() {
 
   const edit = async (oldName, id) => {
     const newName = prompt("Please enter the new name", oldName)
-    if (newName) {
 
-
-
-      await fetch(`http://localhost:4000/categories/${id}`, {
+    const response =  await fetch(`http://localhost:4000/categories/${id}`, {
         method: "PUT",
         body: JSON.stringify({ id: id, updatedName: newName }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         },
       })
+        if(response.status === 400){
+          alert("bad requist")
+        }
 
 
 
       loadList()
-    }
+    
   }
   async function dlt(id) {
 

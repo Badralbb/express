@@ -4,12 +4,24 @@ const port = process.env.port || 4000
 const fs = require("fs")
 const cors = require("cors")
 app.use(cors())
+const { v4: uuidv4 } = require('uuid');
+
 app.use(express.json())
 app.get('/articles', (req, res) => {
   res.json([{ title: "Hello world1", id: 1 }, { title: "Hello world2", id: 2 }, { title: "Hello world3", id: 3 }])
 })
 
+const readCategories = ()=>{
 
+}
+const createNewCategory = async ({name}) =>{
+  const id = uuidv4()
+ 
+  categories.push({name,id})
+
+  fs.writeFileSync("content.json", JSON.stringify(categories))
+  return id
+}
 
 let categories = JSON.parse(fs.readFileSync("content.json", "utf-8"))
 
@@ -22,18 +34,10 @@ app.get("/categories/:id", (req, res) => {
   res.json(category)
 })
 
-app.post("/categories", (req, res) => {
+app.post("/categories", async (req, res) => {
 
   const { name } = req.body
-  const id = new Date().toISOString()
-
-  categories.push({
-    name,
-    id
-  })
-
-  fs.writeFileSync("content.json", JSON.stringify(categories))
-
+   const id = await createNewCategory({name})
   res.status(201).json({id})
 })
 app.delete("/categories/:id", (req, res) => {
@@ -54,7 +58,10 @@ app.delete("/categories/:id", (req, res) => {
 app.put("/categories/:id", (req, res) => {
   const { id } = req.params
   const { updatedName } = req.body
-
+  if(!updatedName){
+    res.status(400).json({message: "Name field is required"})
+    return
+  }
   const index = categories.findIndex(cat => cat.id == id)
 
   categories[index].name = updatedName
