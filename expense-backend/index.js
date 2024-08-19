@@ -25,11 +25,11 @@ app.get("/categories/:id", (req, res) => {
 app.post("/categories", (req, res) => {
 
   const { name } = req.body
-
+  const id = new Date().toISOString()
 
   categories.push({
     name: name,
-    id: new Date().toISOString()
+    id
 
   })
 
