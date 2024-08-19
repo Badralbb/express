@@ -28,23 +28,27 @@ app.post("/categories", (req, res) => {
   const id = new Date().toISOString()
 
   categories.push({
-    name: name,
+    name,
     id
-
   })
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
 
-  res.json(["Success"])
+  res.status(201).json({id})
 })
 app.delete("/categories/:id", (req, res) => {
   const { id } = req.params
+  const deleteIndex = categories.findIndex(cat=>cat.id === id)
+  if(deleteIndex < 0){
+    res.sendStatus(404)
+    return
+  }
 
   categories = categories.filter((cat) => cat.id != id)
 
   fs.writeFileSync("content.json", JSON.stringify(categories))
 
-  res.json(["Success"])
+  res.sendStatus(204)
 
 })
 app.put("/categories/:id", (req, res) => {

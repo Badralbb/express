@@ -65,19 +65,17 @@ export default function Home() {
     }
   }
   async function dlt(id) {
-    if (confirm("Are you sure")) {
-      await fetch(`http://localhost:4000/categories/${id}`, {
-        method: "DELETE",
-        body: JSON.stringify({ id: id }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
 
-
-      loadList()
+    const response = await fetch(`http://localhost:4000/categories/${id}`, {
+      method: "DELETE",
+    })
+    if (response.status === 404) {
+      alert("Category not found")
     }
+
+    loadList()
   }
+
 
 
 
@@ -111,7 +109,11 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="flex gap-5 mt-3">
+        <div>wrong id</div>
+        <button className="bg-red-400" onClick={() => dlt("wrong id")}>delete</button>
 
+      </div>
 
     </main>
   );
