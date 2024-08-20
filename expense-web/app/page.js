@@ -65,7 +65,7 @@ export default function Home() {
     
   }
   async function dlt(id) {
-
+    console.log(id)
     const response = await fetch(`http://localhost:4000/categories/${id}`, {
       method: "DELETE",
     })

@@ -25,8 +25,6 @@ app.delete("/categories/:id",async(req, res) => {
   const { id } = req.params
   const categories =  await deleteCategory({id})
   const deleteIndex =  categories.findIndex(cat=>cat.id == id)
-  console.log(categories)
-  console.log(deleteIndex)
   // if(deleteIndex < 0){
   //   res.sendStatus(404)
   //   return
