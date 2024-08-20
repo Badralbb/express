@@ -13,8 +13,10 @@ const getCategory = ({ id }) => {
 }
 
 const deleteCategory = ({ id }) => {
+    let categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
     categories = categories.filter((cat) => cat.id != id)
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
+    return categories
 }
 
 const updateCategories = ({ id, updatedName }) => {

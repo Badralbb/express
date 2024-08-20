@@ -29,23 +29,23 @@ app.post("/categories", async (req, res) => {
 })
 app.delete("/categories/:id", (req, res) => {
   const { id } = req.params
+  const categories = deleteCategory({id})
   const deleteIndex = categories.findIndex(cat=>cat.id === id)
   if(deleteIndex < 0){
     res.sendStatus(404)
     return
   }
-  deleteCategory({id})
   res.sendStatus(205)
 
 })
-app.put("/categories/:id", (req, res) => {
+app.put("/categories/:id", async (req, res) => {
   const { id } = req.params
   const { updatedName } = req.body
   if(!updatedName){
     res.status(400).json({message: "Name field is required"})
     return
   }
-  updateCategories({id,updatedName})
+  await updateCategories({id,updatedName})
 
   res.sendStatus(205)
 })
