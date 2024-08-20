@@ -1,7 +1,7 @@
 
 const {startApp} = require("./configs/basic")
 const { getCategory, getCategories, createNewCategory, deleteCategory, updateCategories } = require("./services/categoryService")
-
+const fs = require("fs")
 const app = startApp()
 
 app.get("/categories", (req, res) => {
@@ -23,12 +23,13 @@ app.post("/categories", async (req, res) => {
 })
 app.delete("/categories/:id",async(req, res) => {
   const { id } = req.params
-  const categories =  await deleteCategory({id})
+  const categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
   const deleteIndex =  categories.findIndex(cat=>cat.id == id)
-  // if(deleteIndex < 0){
-  //   res.sendStatus(404)
-  //   return
-  // }
+ deleteCategory({id})
+  if(deleteIndex < 0){
+    res.sendStatus(404)
+    return
+  }
   res.sendStatus(205)
 
 })
