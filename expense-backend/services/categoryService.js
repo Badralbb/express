@@ -6,7 +6,8 @@ const getCategories = () =>{
     const categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
     return categories
 }
-const getCategory = ({ id }) => {
+const getCategory = (id) => {
+    const categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
 
     const category = categories.find(cat => cat.id === id)
     return category
