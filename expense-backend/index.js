@@ -27,14 +27,16 @@ app.post("/categories", async (req, res) => {
    const id = await createNewCategory({name})
   res.status(201).json({id})
 })
-app.delete("/categories/:id", (req, res) => {
+app.delete("/categories/:id",async(req, res) => {
   const { id } = req.params
-  const categories = deleteCategory({id})
-  const deleteIndex = categories.findIndex(cat=>cat.id === id)
-  if(deleteIndex < 0){
-    res.sendStatus(404)
-    return
-  }
+  const categories =  await deleteCategory({id})
+  const deleteIndex =  categories.findIndex(cat=>cat.id == id)
+  console.log(categories)
+  console.log(deleteIndex)
+  // if(deleteIndex < 0){
+  //   res.sendStatus(404)
+  //   return
+  // }
   res.sendStatus(205)
 
 })
@@ -45,7 +47,7 @@ app.put("/categories/:id", async (req, res) => {
     res.status(400).json({message: "Name field is required"})
     return
   }
-  await updateCategories({id,updatedName})
+  updateCategories({id,updatedName})
 
   res.sendStatus(205)
 })

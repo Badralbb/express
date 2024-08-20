@@ -13,23 +13,23 @@ const getCategory = ({ id }) => {
 }
 
 const deleteCategory = ({ id }) => {
-    let categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
+    let categories = getCategories()
     categories = categories.filter((cat) => cat.id != id)
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
     return categories
 }
 
 const updateCategories = ({ id, updatedName }) => {
+    const categories = getCategories()
     const index = categories.findIndex(cat => cat.id == id)
-
     categories[index].name = updatedName
-
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
 }
 
 const createNewCategory = async (form) => {
     const id = uuidv4()
     form.id = id
+    const categories = getCategories()
     categories.push(form)
 
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
