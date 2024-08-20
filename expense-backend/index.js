@@ -75,7 +75,7 @@ app.put("/categories/:id", (req, res) => {
     return
   }
   updateCategories({id,updatedName})
-
+  
   res.sendStatus(205)
 })
 app.listen(port, () => {
