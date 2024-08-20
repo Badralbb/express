@@ -1,11 +1,11 @@
 
 const {startApp} = require("./configs/basic")
 const { readCategories } = require("./controller/control")
-const { getCategory, getCategories, createNewCategory, deleteCategory, updateCategories } = require("./services/categoryService")
+const { getCategory, createNewCategory, deleteCategory, updateCategories } = require("./services/categoryService")
 const fs = require("fs")
 const app = startApp()
 
-app.get("/categories", )
+app.get("/categories",readCategories)
 app.get("/categories/:id", (req, res) => {
   const { id } = req.params
   const category = getCategory({id})
