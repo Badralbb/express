@@ -2,13 +2,7 @@
 const {startApp} = require("./configs/basic")
 const { getCategory, getCategories, createNewCategory, deleteCategory, updateCategories } = require("./services/categoryService")
 
-
-
-
 const app = startApp()
-
-
-
 
 app.get("/categories", (req, res) => {
   const categories = getCategories();
