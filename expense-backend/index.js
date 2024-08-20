@@ -25,10 +25,10 @@ const updateCategories = ({id,updatedName}) =>{
   fs.writeFileSync("data/content.json", JSON.stringify(categories))
 }
 
-const createNewCategory = async ({name}) =>{
+const createNewCategory = async (form) =>{
   const id = uuidv4()
- 
-  categories.push({name,id})
+  form.id = id
+  categories.push(form)
 
   fs.writeFileSync("data/content.json", JSON.stringify(categories))
   return id
