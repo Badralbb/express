@@ -1,7 +1,7 @@
 const { getCategories, getCategory, createNewCategory, updateCategories, deleteCategory } = require("../services/categoryService");
 const fs = require("fs")
-const readCategories = (req,res) =>{
-    const categories = getCategories();
+const readCategories =  async (req,res) =>{
+    const categories = await getCategories();
     res.json(categories)
 }
 const readOneCategory = (req,res) =>{

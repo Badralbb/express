@@ -1,9 +1,10 @@
 const fs = require("fs")
 
 const { v4: uuidv4 } = require('uuid');
+const { sql } = require("../configs/database");
 
-const getCategories = () =>{
-    const categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
+const getCategories = async () =>{
+    const categories = await sql`select * from category`
     return categories
 }
 const getCategory = (id) => {
@@ -27,13 +28,9 @@ const updateCategories = ({ id, updatedName }) => {
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
 }
 
-const createNewCategory = async (form) => {
+const createNewCategory = async ({name}) => {
     const id = uuidv4()
-    form.id = id
-    const categories = getCategories()
-    categories.push(form)
-
-    fs.writeFileSync("data/content.json", JSON.stringify(categories))
+    await sql`insert into category (name, id) values(${name},${id})`
     return id
 }
 
