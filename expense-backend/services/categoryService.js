@@ -21,11 +21,11 @@ const deleteCategory = (id) => {
     return categories
 }
 
-const updateCategories = ({ id, updatedName }) => {
-    const categories = getCategories()
-    const index = categories.findIndex(cat => cat.id == id)
-    categories[index].name = updatedName
-    fs.writeFileSync("data/content.json", JSON.stringify(categories))
+const updateCategories = async({ id, updatedName }) => {
+    await sql`UPDATE category
+    SET name = ${updatedName}
+    WHERE id=${id}`
+    
 }
 
 const createNewCategory = async ({name}) => {
