@@ -13,7 +13,7 @@ const getCategory = (id) => {
     return category
 }
 
-const deleteCategory = ({ id }) => {
+const deleteCategory = (id) => {
     let categories = getCategories()
     categories = categories.filter((cat) => cat.id != id)
     fs.writeFileSync("data/content.json", JSON.stringify(categories))
