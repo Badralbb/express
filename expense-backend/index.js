@@ -8,8 +8,4 @@ app.post("/categories", postCategories)
 app.delete("/categories/:id",deleteCategories)
 app.put("/categories/:id", putCategories)
 
-app.get("/dbase",async(req,res)=>{
-    const result = await sql`select version()`;
-    console.log(result);
-    res.json({result})
-})
+
