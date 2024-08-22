@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const { sql } = require("../configs/database");
 
 const getCategories = async () =>{
-    const categories = await sql`select * from category`
+    const categories = await sql`select * from category order by name`
     return categories
 }
 const getCategory = async (id) => {
