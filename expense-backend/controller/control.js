@@ -16,21 +16,21 @@ const postCategories = async (req,res)=>{
    res.status(201).json({id})
 }
 
-const deleteCategories = (req,res)=>{
+const deleteCategories = async(req,res)=>{
     const { id } = req.params
    
-    deleteCategory(id)
+    await deleteCategory(id)
     res.sendStatus(205)
   
 }
-const putCategories = (req,res) =>{
+const putCategories = async(req,res) =>{
     const { id } = req.params
     const { updatedName } = req.body
     if(!updatedName){
       res.status(400).json({message: "Name field is required"})
       return
     }
-    updateCategories({id,updatedName})
+    await updateCategories({id,updatedName})
   
     res.sendStatus(205)
 }
