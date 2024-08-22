@@ -7,5 +7,3 @@ app.get("/categories/:id",readOneCategory)
 app.post("/categories", postCategories)
 app.delete("/categories/:id",deleteCategories)
 app.put("/categories/:id", putCategories)
-
-
