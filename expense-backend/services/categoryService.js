@@ -14,11 +14,8 @@ const getCategory = (id) => {
     return category
 }
 
-const deleteCategory = (id) => {
-    let categories = getCategories()
-    categories = categories.filter((cat) => cat.id != id)
-    fs.writeFileSync("data/content.json", JSON.stringify(categories))
-    return categories
+const deleteCategory = async(id) => {
+    await sql`DELETE FROM category WHERE id=${id}`
 }
 
 const updateCategories = async({ id, updatedName }) => {

@@ -18,13 +18,8 @@ const postCategories = async (req,res)=>{
 
 const deleteCategories = (req,res)=>{
     const { id } = req.params
-    const categories = JSON.parse(fs.readFileSync("data/content.json", "utf-8"))
-    const deleteIndex =  categories.findIndex(cat=>cat.id == id)
-   deleteCategory({id})
-    if(deleteIndex < 0){
-      res.sendStatus(404)
-      return
-    }
+   
+    deleteCategory(id)
     res.sendStatus(205)
   
 }
