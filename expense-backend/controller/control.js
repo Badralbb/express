@@ -4,9 +4,9 @@ const readCategories =  async (req,res) =>{
     const categories = await getCategories();
     res.json(categories)
 }
-const readOneCategory = (req,res) =>{
+const readOneCategory = async(req,res) =>{
     const { id } = req.params
-    const category = getCategory(id)
+    const category = await getCategory(id)
 
     res.json(category)
 }
