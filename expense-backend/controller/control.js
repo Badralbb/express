@@ -7,8 +7,11 @@ const readCategories =  async (req,res) =>{
 const readOneCategory = async(req,res) =>{
     const { id } = req.params
     const category = await getCategory(id)
-
-    res.json(category)
+    if(!category){
+        res.sendStatus(404)
+        return
+    }
+    res.sendStatus(200)
 }
 const postCategories = async (req,res)=>{
     const { name } = req.body

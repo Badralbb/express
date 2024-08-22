@@ -9,7 +9,10 @@ const getCategories = async () =>{
 }
 const getCategory = async (id) => {
     const category = await sql`select * from category where id=${id}`
-    return category
+    if(category.length){
+        return category[0]
+    }
+    return null
 }
 
 const deleteCategory = async(id) => {
