@@ -8,7 +8,7 @@ const getCategories = async () =>{
     return categories
 }
 const getCategory = async (id) => {
-    const category = await sql`select id=${id} from category`
+    const category = await sql`select * from category where id=${id}`
     return category
 }
 
