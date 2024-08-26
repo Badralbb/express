@@ -1,6 +1,8 @@
 "use client"
 
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Component } from "@/components/ui/DemoChart";
 import { useEffect, useState } from "react";
 
@@ -82,7 +84,7 @@ export default function Home() {
 
       <div>
 
-        <button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</button>
+        <Button onClick={createNewCategory} className="bg-red-500 rounded-2xl w-52">Add New</Button>
 
         <div className="flex flex-col gap-5">
 
@@ -97,9 +99,9 @@ export default function Home() {
                   }
                 </div>
 
-                <button className="bg-red-400" onClick={() => edit(category.name, category.id)}>edit</button>
+                <Button className="bg-red-400" onClick={() => edit(category.name, category.id)}>edit</Button>
 
-                <button className="bg-red-400" onClick={() => dlt(category.id)}>delete</button>
+                <Button className="bg-red-400" onClick={() => dlt(category.id)}>delete</Button>
 
               </div>
             ))
@@ -110,7 +112,10 @@ export default function Home() {
       <div className="flex gap-5 mt-3">
         <div>wrong id</div>
         <button className="bg-red-400" onClick={() => dlt("wrong id")}>delete</button>
-
+          <Alert>
+          <AlertTitle>Hello World!</AlertTitle>
+          <AlertDescription>This is AlertDescription</AlertDescription>
+          </Alert>
       </div>
 
     </main>
