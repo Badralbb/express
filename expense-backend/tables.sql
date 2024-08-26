@@ -1,5 +1,5 @@
 CREATE TABLE category (
-    id TEXT PRIMARY KEY,
+    id char(36) PRIMARY KEY,
     name TEXT NOT NULL,
     color varchar(16),
     icon varchar(16)
@@ -8,6 +8,17 @@ CREATE TABLE category (
 ALTER TABLE category 
 ADD COLUMN color varchar(16),
 ADD COLUMN icon varchar(16)
+
+CREATE TABLE transaction (
+  id char(36) PRIMARY KEY,
+  amount decimal(10,2),
+  categoryId char(36),
+  type varchar(10),
+  date Date,
+  payee varchar(),
+  note TEXT
+)
+
 
 SELECT id,name FROM category
 
