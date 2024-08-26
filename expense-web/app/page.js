@@ -26,7 +26,7 @@ export default function Home() {
 
         method: "POST",
         body: JSON.stringify({
-          name: name,
+          name: name,color:'red',icon:"hooson"
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -52,7 +52,7 @@ export default function Home() {
 
     const response =  await fetch(`http://localhost:4000/categories/${id}`, {
         method: "PUT",
-        body: JSON.stringify({ id: id, updatedName: newName }),
+        body: JSON.stringify({ id: id, updatedName: newName ,color:"orange",icon:"hooson"}),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         },

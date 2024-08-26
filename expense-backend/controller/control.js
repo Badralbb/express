@@ -14,8 +14,9 @@ const readOneCategory = async(req,res) =>{
     res.sendStatus(200)
 }
 const postCategories = async (req,res)=>{
-    const { name } = req.body
-    const id = await createNewCategory({name})
+    const { name,color,icon } = req.body
+    
+    const id = await createNewCategory({name,color,icon})
    res.status(201).json({id})
 }
 
@@ -28,12 +29,13 @@ const deleteCategories = async(req,res)=>{
 }
 const putCategories = async(req,res) =>{
     const { id } = req.params
-    const { updatedName } = req.body
+    const { updatedName,color,icon } = req.body
+    
     if(!updatedName){
       res.status(400).json({message: "Name field is required"})
       return
     }
-    await updateCategories({id,updatedName})
+    await updateCategories({id,updatedName,color,icon})
   
     res.sendStatus(205)
 }
