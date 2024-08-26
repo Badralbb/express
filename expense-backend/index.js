@@ -1,4 +1,3 @@
-const {sql} = require("./configs/database")
 const {startApp} = require("./configs/basic")
 const { readCategories, readOneCategory, postCategories, putCategories, deleteCategories } = require("./controller/control")
 const app = startApp()
